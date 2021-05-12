@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -17,13 +18,12 @@ public class Author {
     private String firstName;
     private String lastName;
     @ManyToMany(mappedBy = "authors")
-    private Set<Book> books;
+    private Set<Book> books = new HashSet<>();
 
 
-    public Author(String firstName, String lastName, Set<Book> books) {
+    public Author(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.books = books;
     }
 
     @Override
@@ -42,5 +42,12 @@ public class Author {
     }
 
     public Author() {
+    }
+
+    public String toString() {
+        return "Author(id=" + this.getId() +
+                ", firstName=" + this.getFirstName() +
+                ", lastName=" + this.getLastName() +
+                ", books=" + this.getBooks() + ")";
     }
 }
